@@ -14,4 +14,9 @@ public class GreetingController {
         return new Greeting(atomicLong.incrementAndGet(),String.format(template,name));
     }
 
+    @PostMapping("/greeting")
+    public Greeting greeting(@RequestBody Greeting greeting) {
+        return new Greeting(atomicLong.incrementAndGet(),greeting.getGreetingMessage());
+    }
+
 }
