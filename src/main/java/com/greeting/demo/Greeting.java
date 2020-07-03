@@ -1,13 +1,21 @@
 package com.greeting.demo;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 public class Greeting {
 
-    private long greetingId;
+    @Id
+    private Long greetingId;
     private String greetingMessage;
 
     public Greeting(long greetingId, String greetingMessage) {
         this.greetingId = greetingId;
         this.greetingMessage = greetingMessage;
+    }
+
+    public Greeting() {
     }
 
     @Override

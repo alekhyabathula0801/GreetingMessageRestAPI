@@ -1,22 +1,26 @@
 package com.greeting.demo;
 
-import org.springframework.stereotype.Component;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.concurrent.atomic.AtomicLong;
 
-@Component
+@Service
 public class GreetingService {
 
-    private final String template = "Hello, %s ! ";
+    private final String template = "Hello %s ! ";
     private final AtomicLong atomicLong = new AtomicLong();
 
-    public Greeting findGreeting(String name) {
-        return new Greeting(atomicLong.incrementAndGet(),String.format(template,name));
+    @Autowired
+    GreetingRepository greetingRepository;
+
+    public Greeting findGreeting(Long employeeId) {
+        return greetingRepository.findById(employeeId).get();
     }
 
     public Greeting saveGreeting(User user) {
         String message = String.format(template,(user.toString().isEmpty()) ? "Hello World" : user.toString());
-        return new Greeting(atomicLong.incrementAndGet(),message);
+        return greetingRepository.save(new Greeting(atomicLong.incrementAndGet(),message));
     }
 
 }

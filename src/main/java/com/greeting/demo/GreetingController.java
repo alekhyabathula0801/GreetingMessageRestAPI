@@ -9,9 +9,9 @@ public class GreetingController {
     @Autowired
     GreetingService greetingService;
 
-    @GetMapping("/greeting/{name}")
-    public Greeting greeting(@PathVariable(value = "name") String name) {
-        return greetingService.findGreeting(name);
+    @GetMapping("/greeting/{employeeId}")
+    public Greeting greeting(@PathVariable(value = "employeeId") Long employeeId) {
+        return greetingService.findGreeting(employeeId);
     }
 
     @PostMapping("/greeting")
