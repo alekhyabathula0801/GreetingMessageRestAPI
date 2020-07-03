@@ -9,14 +9,24 @@ public class GreetingController {
     @Autowired
     GreetingService greetingService;
 
-    @GetMapping("/greeting/{employeeId}")
-    public Greeting greeting(@PathVariable(value = "employeeId") Long employeeId) {
-        return greetingService.findGreeting(employeeId);
+    @GetMapping("/greeting/{greetingId}")
+    public Greeting findGreeting(@PathVariable(value = "greetingId") Long greetingId) {
+        return greetingService.findGreeting(greetingId);
     }
 
     @PostMapping("/greeting")
-    public Greeting greeting(@RequestBody User user) {
+    public Greeting saveGreeting(@RequestBody User user) {
         return greetingService.saveGreeting(user);
+    }
+
+    @DeleteMapping("/greeting/{greetingId}")
+    public void deleteGreeting(@PathVariable(value = "greetingId") Long greetingId) {
+        greetingService.deleteGreeting(greetingId);
+    }
+
+    @DeleteMapping("/greeting")
+    public void deleteGreeting() {
+        greetingService.deleteAllGreetings();
     }
 
 }

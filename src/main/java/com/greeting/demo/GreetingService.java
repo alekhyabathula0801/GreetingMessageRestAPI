@@ -8,7 +8,7 @@ import java.util.concurrent.atomic.AtomicLong;
 @Service
 public class GreetingService {
 
-    private final String template = "Hello %s ! ";
+    private final String template = "Hello %s !";
     private final AtomicLong atomicLong = new AtomicLong();
 
     @Autowired
@@ -19,8 +19,16 @@ public class GreetingService {
     }
 
     public Greeting saveGreeting(User user) {
-        String message = String.format(template,(user.toString().isEmpty()) ? "Hello World" : user.toString());
+        String message = String.format(template,(user.toString().isEmpty()) ? "World" : user.toString());
         return greetingRepository.save(new Greeting(atomicLong.incrementAndGet(),message));
+    }
+
+    public void deleteGreeting(Long greetingId) {
+        greetingRepository.deleteById(greetingId);
+    }
+
+    public void deleteAllGreetings() {
+        greetingRepository.deleteAll();
     }
 
 }
