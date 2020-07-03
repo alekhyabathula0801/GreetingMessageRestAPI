@@ -39,4 +39,10 @@ public class GreetingService {
         greetingRepository.deleteAll();
     }
 
+    public Greeting updateGreeting(Greeting greeting) {
+        if(greetingRepository.existsById(greeting.getGreetingId()))
+            deleteGreeting(greeting.getGreetingId());
+        return greetingRepository.save(greeting);
+    }
+
 }

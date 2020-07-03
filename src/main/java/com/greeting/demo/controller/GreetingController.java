@@ -40,4 +40,9 @@ public class GreetingController {
         greetingService.deleteAllGreetings();
     }
 
+    @PutMapping(path = "/greeting",produces = {MediaType.APPLICATION_JSON_VALUE,MediaType.APPLICATION_XML_VALUE})
+    public Greeting updateGreeting(@RequestBody Greeting greeting) {
+        return greetingService.updateGreeting(greeting);
+    }
+
 }
