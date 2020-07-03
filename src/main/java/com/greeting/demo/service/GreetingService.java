@@ -1,8 +1,12 @@
-package com.greeting.demo;
+package com.greeting.demo.service;
 
+import com.greeting.demo.repository.GreetingRepository;
+import com.greeting.demo.model.Greeting;
+import com.greeting.demo.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
 @Service
@@ -16,6 +20,10 @@ public class GreetingService {
 
     public Greeting findGreeting(Long employeeId) {
         return greetingRepository.findById(employeeId).get();
+    }
+
+    public List<Greeting> findAllGreetings() {
+        return greetingRepository.findAll();
     }
 
     public Greeting saveGreeting(User user) {

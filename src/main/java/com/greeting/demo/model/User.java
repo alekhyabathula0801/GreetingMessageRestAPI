@@ -1,4 +1,4 @@
-package com.greeting.demo;
+package com.greeting.demo.model;
 
 public class User {
 

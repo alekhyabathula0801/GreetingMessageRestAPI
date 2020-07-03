@@ -1,7 +1,12 @@
-package com.greeting.demo;
+package com.greeting.demo.controller;
 
+import com.greeting.demo.model.Greeting;
+import com.greeting.demo.model.User;
+import com.greeting.demo.service.GreetingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 public class GreetingController {
@@ -12,6 +17,11 @@ public class GreetingController {
     @GetMapping("/greeting/{greetingId}")
     public Greeting findGreeting(@PathVariable(value = "greetingId") Long greetingId) {
         return greetingService.findGreeting(greetingId);
+    }
+
+    @GetMapping("/greeting")
+    public List<Greeting> findAllGreetings() {
+        return greetingService.findAllGreetings();
     }
 
     @PostMapping("/greeting")
@@ -25,7 +35,7 @@ public class GreetingController {
     }
 
     @DeleteMapping("/greeting")
-    public void deleteGreeting() {
+    public void deleteAllGreetings() {
         greetingService.deleteAllGreetings();
     }
 
