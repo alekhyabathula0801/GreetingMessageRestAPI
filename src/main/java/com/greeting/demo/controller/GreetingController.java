@@ -4,6 +4,7 @@ import com.greeting.demo.model.Greeting;
 import com.greeting.demo.model.User;
 import com.greeting.demo.service.GreetingService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,17 +15,17 @@ public class GreetingController {
     @Autowired
     GreetingService greetingService;
 
-    @GetMapping("/greeting/{greetingId}")
+    @GetMapping(path = "/greeting/{greetingId}",produces = {MediaType.APPLICATION_JSON_VALUE,MediaType.APPLICATION_XML_VALUE})
     public Greeting findGreeting(@PathVariable(value = "greetingId") Long greetingId) {
         return greetingService.findGreeting(greetingId);
     }
 
-    @GetMapping("/greeting")
+    @GetMapping(path = "/greeting",produces = {MediaType.APPLICATION_JSON_VALUE,MediaType.APPLICATION_XML_VALUE})
     public List<Greeting> findAllGreetings() {
         return greetingService.findAllGreetings();
     }
 
-    @PostMapping("/greeting")
+    @PostMapping(path = "/greeting",produces = {MediaType.APPLICATION_JSON_VALUE,MediaType.APPLICATION_XML_VALUE})
     public Greeting saveGreeting(@RequestBody User user) {
         return greetingService.saveGreeting(user);
     }
