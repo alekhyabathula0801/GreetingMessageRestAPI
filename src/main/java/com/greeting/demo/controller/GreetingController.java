@@ -55,9 +55,13 @@ public class GreetingController {
         greetingService.deleteAllGreetings();
     }
 
-    @PutMapping(path = "/greeting",produces = {MediaType.APPLICATION_JSON_VALUE,MediaType.APPLICATION_XML_VALUE})
-    public Greeting updateGreeting(@RequestBody Greeting greeting) {
-        return greetingService.updateGreeting(greeting);
+    @PutMapping(path = "/greeting/{greetingId}",produces = {MediaType.APPLICATION_JSON_VALUE,MediaType.APPLICATION_XML_VALUE})
+    public Greeting updateGreeting(@PathVariable(value = "greetingId") Long greetingId,@RequestBody User user) {
+        if(user.getFirstName() == null | user.getLastName() == null)
+            throw new GreetingException("Name cannot be NULL");
+        if(user.getLastName().isEmpty() | user.getFirstName().isEmpty())
+            throw new GreetingException("Name cannot be Empty");
+        return greetingService.updateGreeting(greetingId,user);
     }
 
 }

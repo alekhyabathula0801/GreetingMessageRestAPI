@@ -27,8 +27,7 @@ public class GreetingService {
     }
 
     public Greeting saveGreeting(User user) {
-        String message = String.format(template,(user.toString().isEmpty()) ? "World" : user.toString());
-        return greetingRepository.save(new Greeting(atomicLong.incrementAndGet(),message));
+        return greetingRepository.save(new Greeting(atomicLong.incrementAndGet(),String.format(template,user.toString())));
     }
 
     public void deleteGreeting(Long greetingId) {
@@ -39,10 +38,10 @@ public class GreetingService {
         greetingRepository.deleteAll();
     }
 
-    public Greeting updateGreeting(Greeting greeting) {
-        if(greetingRepository.existsById(greeting.getGreetingId()))
-            deleteGreeting(greeting.getGreetingId());
-        return greetingRepository.save(greeting);
+    public Greeting updateGreeting(Long greetingId,User user) {
+        if(greetingRepository.existsById(greetingId))
+            deleteGreeting(greetingId);
+        return greetingRepository.save(new Greeting(greetingId,String.format(template,user.toString())));
     }
 
 }
